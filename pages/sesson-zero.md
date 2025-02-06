@@ -8,7 +8,7 @@ background: https://images.unsplash.com/photo-1520022911530-fea50671df2e?q=80&w=
 
 Tu primer paso para crear microservicios en Java sin estrés
 
-By: Jhordy Caceres ([@jhordycg](https://jhordycg.dev))
+By: Jhordy Caceres ([@jhordycg](https://slides.jhordycg.dev))
 
 ---
 hideInToc: true
