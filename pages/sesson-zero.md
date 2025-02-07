@@ -8,7 +8,11 @@ background: https://images.unsplash.com/photo-1520022911530-fea50671df2e?q=80&w=
 
 Tu primer paso para crear microservicios en Java sin estrés
 
+<footer class="absolute bottom-0px right-0px mx-6 my-4 text-md text-color-zinc-500 font-weigth-bold">
+
 By: Jhordy Caceres ([@jhordycg](https://slides.jhordycg.dev))
+
+</footer>
 
 ---
 hideInToc: true
@@ -529,4 +533,91 @@ layout: intro
 
 - [Building an Application with Spring Boot](https://spring.io/guides/gs/rest-service)
 
+---
+layout: default
+hideInToc: true
+---
 
+# Spring Beans
+
+Los beans en spring son markadores que permiten al IoC Container de Spring *crear*, *gestionar* y *resolver*: 
+
+```mermaid {scale: 0.8}
+graph TD;
+    A["@Component"] -->|Especialización| B["@Service"];
+    A -->|Especialización| C["@Repository"];
+    A -->|Especialización| D["@RestController"];
+    D -->|Manejo de Excepciones| E["@RestControllerAdvice"];
+
+    A -- "Clase genérica administrada por Spring" --> F["Clase de utilidad"];
+
+    B -- "Para lógica de negocio" --> G["UserService"];
+    C -- "Para acceso a datos" --> H["UserRepository"];
+    D -- "Controlador REST" --> I["UserController"];
+    E -- "Manejo de errores en controladores REST" --> J["GlobalExceptionHandler"];
+
+    classDef bean fill:#000,stroke:#fff,stroke-width:1px;
+    class A,B,C,D,E bean;
+```
+
+---
+layout: default
+hideInToc: true
+---
+
+# Injección de dependencia (DI / IoC)
+
+Es un Patrón de diseño y uno de los principios solid que nos dice que trabajemos con abstracciones y no con implementaciones.
+
+A continuación se muestran 3 formas de aplicarla:
+
+````md magic-move {lines: true}
+```java
+    @Component
+    class Cliente {
+        @Autowired
+        private Servicio servicio; // Inyección por campo
+
+        public void realizarTarea() {
+            servicio.ejecutar();
+        }
+    }
+```
+```java
+    @Component
+    class Cliente {
+        private Servicio servicio;
+
+        @Autowired
+        public void setServicio(Servicio servicio) { // Inyección por método
+            this.servicio = servicio;
+        }
+
+        public void realizarTarea() {
+            servicio.ejecutar();
+        }
+    }
+```
+```java
+    @Component
+    class Cliente {
+        private final Servicio servicio;
+
+        @Autowired
+        public Cliente(Servicio servicio) { // Inyección por constructor
+            this.servicio = servicio;
+        }
+
+        public void realizarTarea() {
+            servicio.ejecutar();
+        }
+    }
+```
+````
+
+---
+layout: center
+hideInToc: true
+---
+
+# ¡Gracias!
